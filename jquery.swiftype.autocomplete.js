@@ -312,7 +312,7 @@
     params['sort_direction'] = handleFunctionParam(config.sortDirection);
     params['per_page'] = config.resultLimit;
 
-    var endpoint = Swiftype.root_url + '/api/v1/public/engines/suggest.json';
+    var endpoint = Swiftype.root_url + '/api/v1/public/engines/search.json';
     $this.currentRequest = $.ajax({
       type: 'GET',
       dataType: 'jsonp',
@@ -320,7 +320,8 @@
       data: params
     }).success(function(data) {
       var norm = normalize(term);
-      if (data.record_count > 0) {
+      var totalResults = data.info[Object.keys(data.info)[0]].total_result_count;
+      if (totalResults > 0) {
         $this.cache.put(norm, data.records);
       } else {
         $this.addEmpty(norm);
