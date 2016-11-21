@@ -392,6 +392,11 @@
         ctx.registerResult($('<li>' + config.renderFunction(document_type, item) + '</li>').appendTo($list), item);
       });
     });
+    config.resultsRenderingComplete(ctx, results);
+  };
+
+  var defaultResultsRenderingComplete = function(ctx, results) {
+    // place holder
   };
 
   var defaultRenderFunction = function(document_type, item) {
@@ -544,6 +549,7 @@
     noResultsMessage: undefined,
     onComplete: defaultOnComplete,
     resultRenderFunction: defaultResultRenderFunction,
+    resultsRenderingComplete: defaultResultsRenderingComplete,
     renderFunction: defaultRenderFunction,
     dropdownStylesFunction: defaultDropdownStylesFunction,
     resultLimit: undefined,
